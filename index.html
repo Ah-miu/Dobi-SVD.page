@@ -76,6 +76,12 @@
                     </a>
                   </span>
 
+                  <span class="link-block">
+                    <a href="https://github.com/Ah-miu/Dobi-SVD.page/archive/refs/heads/main.zip" class="button  is-rounded is-dark">
+                      <i class="fa-solid fa-download"></i> &nbsp; Website(36MB)
+                    </a>
+                  </span>
+
                 </div>
               </div>
             </div>
@@ -102,40 +108,20 @@
             <p class="is-size-3">
               Dobi-SVD is a novel large-model compression solution<br>on low-cost computation devices!
             </p>
-            <p class="is-size-6" style="text-align: left; margin-bottom: -10px;">
-              <strong>todo: edit abstract info.</strong> In this paper, we present new directions using 
-              SVD: we first theoretically and experimentally analyze the optimality of directly 
-              truncating activations, then we further identify three key issues on SVD-based LLM 
-              compression, including (1) How can we determine the optimal truncation position for 
-              each weight matrix in LLMs? (2) How can we efficiently update the weight matrices 
-              based on truncated activations? (3) How can we address the inherent "injection" nature 
-              that results in the information loss of the SVD? We propose a new paradigm for SVD-based 
-              LLM compression, <b>Dobi-SVD</b>, to tackle the three issues.
-              <!-- Large language models (LLMs) have sparked a new wave of AI applications; however, 
-              their substantial computational costs and memory demands pose significant challenges 
-              to democratizing access to LLMs for a broader audience. Singular Value Decomposition 
-              (SVD), a technique studied for decades, offers a hardware-independent and flexibly 
-              tunable solution for LLM compression. In this paper, we present new directions using 
-              SVD: we first theoretically and experimentally analyze the optimality of directly 
-              truncating activations, then we further identify three key issues on SVD-based LLM 
-              compression, including (1) How can we determine the optimal truncation position for 
-              each weight matrix in LLMs? (2) How can we efficiently update the weight matrices 
-              based on truncated activations? (3) How can we address the inherent "injection" nature 
-              that results in the information loss of the SVD? We propose a new paradigm for SVD-based 
-              LLM compression, <b>Dobi-SVD</b>, to tackle the three issues. First, we propose a <b>differentiable</b> 
-              truncation-value learning mechanism, along with gradient-robust backpropagation, enabling 
-              the model to adaptively find the optimal truncation positions. Next, we utilize the Eckart-Young-Mirsky 
-              theorem to derive a theoretically <b>optimal</b> weight update formula through rigorous 
-              mathematical analysis. Lastly, by observing and leveraging the quantization-friendly nature 
-              of matrices after SVD, we reconstruct a mapping between truncation positions and memory requirements, 
-              establishing a <b>bijection</b> from truncation positions to memory. Experimental results show that 
-              with a 40% parameter-compression rate, our method achieves a perplexity of 9.07 on the Wikitext2 dataset 
-              with the compressed LLama-7B model, a 78.7% improvement over the state-of-the-art SVD for LLM 
-              compression method. We emphasize that Dobi-SVD is the first to achieve such a high-ratio LLM compression 
-              while maintaining competitive performance. We also extend our Dobi-SVD to VLM compression, achieving 
-              a 20% increase in throughput with minimal performance degradation. We hope that the inference speedup—up 
-              to 12.4x on 12GB NVIDIA Titan Xp GPUs and 3x on 80GB A100 GPUs for LLMs, and 1.2x on 80GB A100 GPUs for 
-              VLMs—will bring significant benefits to the broader community such as robotics. -->
+            <p class="is-size-5" style="text-align: left; margin-bottom: -10px;">
+              We provide a new LLM-compression solution via SVD,  unlocking new possibilities 
+              for LLM compression beyond quantization and pruning. We point out that the optimal 
+              use of SVD lies in truncating activations, rather than merely using activations 
+              as an optimization distance. Building on this principle, we address three critical 
+              challenges in SVD-based LLM compression: including 
+              <strong>(1)</strong> <span class="custom-underline">How can we determine the optimal activation 
+                truncation position for each weight matrix in LLMs?</span> 
+              <strong>(2)</strong> <span class="custom-underline">How can we efficiently reconstruct the weight 
+                matrices based on truncated activations?</span> 
+              <strong>(3)</strong> <span class="custom-underline">How can we address the inherent "injection" 
+                nature that results in the information loss of the SVD?</span> 
+              We propose Dobi-SVD, which establishes a new, principled approach 
+              to SVD-based LLM compression! Get ready for a cool website presentation : )
             </p>
             <br><br>
             <div class="content has-text-justified">
@@ -305,7 +291,7 @@
           </p>
           <p class="is-size-6" style="text-align: center;">
             The file <i>`bulma.min.css`</i> in 
-            <a href="https://github.com/Ah-miu/Dobi-SVD_webpage" style>source code</a> of this webpage 
+            <a href="https://ah-miu.github.io/Dobi-SVD.page/" style>source code</a> of this webpage 
             is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
           </p>
       </div>

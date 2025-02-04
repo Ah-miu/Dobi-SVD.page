@@ -17,8 +17,14 @@
 }
 
 .link-block a {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.custom-underline {
+  text-decoration: underline;
+  text-decoration-color: rgba(148, 167, 207,0.5);
+  text-decoration-thickness: 2px;
+  text-decoration-skip-ink: none;
 }
 
 .footer a{
