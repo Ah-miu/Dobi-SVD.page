@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 5</title>
+    <link rel="stylesheet" href="./style/blog.css">
+    <link rel="stylesheet" href="../style/css/bulma.min.css">
+
+    <!-- MathJax -->
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>        
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$']]},
+      });
+    </script>
+</head>
+<body>
+    <div class="columns has-text-centered">
+        <h1 class="title is-2" style="margin-top: 25px;">3. Loog-overlook Limitation</h1>
+    </div><br>
+    
+    <!-- what -->
+    <h1 class="title is-3">"What"</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/o5.1.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        When using SVD for matrix decomposition, if we want to compress the storage space, 
+        this formula must hold: $k \lt \frac{mn}{m+n}$. <br><br>
+
+        For simplicity, let's assume $m = n$. In that case, $k \lt \frac{n}{2}$.
+        In other words, to compress, we must remove at least half of the singular value information.<br><br>
+
+        This problem, which had remained unresolved for 30+ years since the introduction of SVD for compression<sup>[1]</sup>. 
+        Previous SVD-based methods often ignored this issue because they couldn't solve it, 
+        while non-SVD-based methods focused on it to highlight the advantages of their approach.
+    </p>
+    <br><br>
+
+    <!-- Further what -->
+    <h1 class="title is-3">Further Defining the Problem and "How"</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/o5.2.gif">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        From the perspective of mapping, it's an injection, meaning that a significant portion of the rank 
+        information must inevitably be discarded. We know that the more singular values we consider, the better 
+        the performance will be. So, we want to use remapping to change this injection into a bijection.
+    </p>
+    <br><br>
+
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/o5.3.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        By establishing a one-to-one relationship between the truncation position k and the rank, 
+        and performing reverse calculation, we obtain that the matrix after SVD compression can only be 
+        stored in a space of size: $k \times max(m, n)$.
+
+    </p>
+    <br><br>
+    
+    <p class="is-size-5">
+        To solve this problem, we'll add two pieces of information.
+    </p>
+    <br><br>
+
+    <!-- Key 1 -->
+    <h1 class="title is-3">[Key 1] About U&V</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/o5.4.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        Firstly, we've always been focusing on singular values, but now let's shift our attention to matrices U and V. 
+        These are orthogonal matrices, and orthogonal matrices have a special property: as the dimensions increase, 
+        their column vectors become more concentrated and approach a normal distribution.
+    </p>
+    <br><br>
+
+    <!-- Key 2 -->
+    <h1 class="title is-3">[Key 2] About Normal Quantization</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/o5.5.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        Secondly, we know that quantization is used to represent high precision with low precision. 
+        The most straightforward method is uniform-step quantization, and another method, which fits 
+        well with the characteristics of the U and V matrices, is normal-step quantization.
+    </p>
+    <br><br>
+
+    <!-- Key 1+2 -->
+    <h1 class="title is-3">[Key 1+2] Orthogonal Matrix is Quantization-friendly</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/o5.6.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        By combining these two pieces of information, we can quantize the column vectors of U and V with almost no loss.
+    </p>
+    <br><br>
+
+    <!-- How -->
+    <h1 class="title is-3">A Practical and Flexible Solution</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <div class="overlap-image-container">
+                    <img src="./data/o5.7.png" alt="A Practical and Flexible Solution" class="image-default">
+                    <img src="./data/o5.7.2.png" alt="result"  class="image-hover">
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        To complete the remapping, we can dynamically adjust the storage space of the U and V matrices based on 
+        the quantization-friendly feature of their column vector.
+        This allows the matrix processed by SVD to occupy only a space of size: $k \times max(m, n)$.
+        In test, the performance after remapping improved significantly, with the quantization error being very small.
+
+    </p>
+    <br>
+
+    <hr class="custom-hr">
+    <p class="is-size-7">
+        <sup>[1]</sup> Demmel, J. and Kahan, W. (1990). Accurate Singular Values of Bidiagonal Matrices. SIAM J. Sci. Statist. Comput., 11 (5), 873-912.
+    </p>
+</body>
+</html>

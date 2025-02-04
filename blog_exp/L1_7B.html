@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exp_L1_7B</title>
+    <link rel="stylesheet" href="./style/blog.css">
+    <link rel="stylesheet" href="../style/css/bulma.min.css">
+
+</head>
+<body>
+    <div class="columns has-text-centered">
+        <h1 class="title is-2" style="margin-top: 25px;">On LLaMA-7b</h1>
+    </div><br>
+
+    <h1 class="title is-3">vs. SVD-based Methods (Table 2 in Paper)<sup>[1]</sup></h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/table02_L1-7B.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        <strong><i>Caption</i></strong> Dobi-SVD vs. SOTA methods in terms of compression performance of LLaMA-7b on 
+        three language modeling datasets (in-domain evaluation) and seven common sense 
+        reasoning datasets (zero-shot evaluation). The best performance is marked in bold.  
+        Drop means relative performance drop to baseline. Dobi-SVD* refers to the result 
+        obtained without remapping. The performance of the ASVD and SVD-LLM is derived 
+        from the results reported in SVD-LLM. &#x271D; uses LoRA fine-tuning.<br><br>
+
+        We emphasize that even without the proposed remapping strategy, Dobi-SVD outperforms 
+        prior-arts by a large margin, especially under the low parameter-ratio. This demonstrates 
+        the effectiveness of the proposed differentiable optimization of truncation position. 
+        Additionally, our quantized storage remapping strategy further improves the performance, 
+        showing the significance of our method for improving the injective nature in SVD.
+    </p>
+    <br><br>
+
+    <h1 class="title is-3">vs. Pruning-based Methods (Table 3 in Paper)</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/table03_L1-7B.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        <strong><i>Caption</i></strong> Dobi-SVD vs. popular/SOTA pruning methods in terms of compression performance of LLaMA-7b
+        on seven common sense reasoning datasets. The best performance is marked in bold. The performance
+        of the pruning methods are derived from their original paper.<br><br>
+
+        Pruning method is orthogonal to the SVD-based method and these two kinds of methods are in different tracks.
+        Notably, while both Dobi-SVD and pruning methods require post-training,
+        Dobi-SVD only trains the truncation positions of the matrices. Dobi-SVD significantly reduces the
+        number of trained parameters and computational cost compared to pruning. Specifically, LLM-Pruner
+        requires training additional 1.2 billion parameters to maintain the model performance on LLaMA-7B,
+        whereas Dobi-SVD only trains 224 parameters.
+    </p>
+
+    <hr class="custom-hr">
+    <p class="is-size-7">
+        <sup>[1]</sup> The details of the experimental settings are provided in A.3.
+    </p>
+</body>
+</html>

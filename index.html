@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dobi-SVD: Differentiable SVD for LLM Compression and Some New Perspectives</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Caveat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./style/css/bulma.min.css">
+    <link rel="stylesheet" href="./style/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./style/js/index.js"></script>
+  </head>
+
+
+  <body>
+    <!-- Title -->
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title"><i>Dobi-SVD</i> : Differentiable SVD for <br> LLM Compression <br> and Some New Perspectives</h1>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a href="https://wangqinsi1.github.io/">Qinsi Wang</a><sup>1*</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="https://ah-miu.github.io/">Jinghan Ke</a><sup>2*</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="https://me.berkeley.edu/people/masayoshi-tomizuka/">Masayoshi Tomizuka</a><sup>2</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="https://ece.duke.edu/people/yiran-chen/">Yiran Chen</a><sup>1</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="https://people.eecs.berkeley.edu/~keutzer/">Kurt Keutzer</a><sup>2</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="https://www.chenfengx.com/">Chenfeng Xu</a><sup>2</sup>
+                </span>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <div>
+                  <span class="author-block"><sup>1</sup>Duke University,</span>
+                  <span class="author-block"><sup>2</sup>University of California, Berkeley</span>
+                </div>
+                <div>
+                  <span class="author-block">* denotes equal contribution. Order is decided by coin flip. </span> 
+                  <!-- This work was done when Jinghan Ke visited UC Berkeley. -->
+                </div>
+                <div>
+                  <strong style="font-size: 24px;">
+                    ICLR 2025
+                  </strong>
+                </div>
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- PDF -->
+                  <span class="link-block">
+                    <a href="" class="button is-rounded is-dark" target="_blank">
+                      <i class="fas fa-file-pdf"></i> &nbsp; Paper
+                    </a>
+                  </span>
+
+                  <!-- Code -->
+                  <span class="link-block">
+                    <a href="" class="button  is-rounded is-dark" target="_blank">
+                      <i class="fab fa-github"></i> &nbsp; Code (Coming Soon)
+                    </a>
+                  </span>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Setting -->
+    <div id="blog-modal" class="blog-modal">
+      <div class="blog-modal-content">
+          <span class="blog-modal-close">&times;</span>
+          <iframe id="blog-iframe" src="" frameborder="0"></iframe>
+      </div>
+    </div>
+    <!--/ Blog Setting -->
+
+    <!-- Intro -->
+    <section class="teaser">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="hero-body" style="width: 100%; height: 100%;">
+            <h2><i>Introduction</i></h2>
+            <p class="is-size-3">
+              Dobi-SVD is a novel large-model compression solution<br>on low-cost computation devices!
+            </p>
+            <p class="is-size-6" style="text-align: left; margin-bottom: -10px;">
+              <strong>todo: edit abstract info.</strong> In this paper, we present new directions using 
+              SVD: we first theoretically and experimentally analyze the optimality of directly 
+              truncating activations, then we further identify three key issues on SVD-based LLM 
+              compression, including (1) How can we determine the optimal truncation position for 
+              each weight matrix in LLMs? (2) How can we efficiently update the weight matrices 
+              based on truncated activations? (3) How can we address the inherent "injection" nature 
+              that results in the information loss of the SVD? We propose a new paradigm for SVD-based 
+              LLM compression, <b>Dobi-SVD</b>, to tackle the three issues.
+              <!-- Large language models (LLMs) have sparked a new wave of AI applications; however, 
+              their substantial computational costs and memory demands pose significant challenges 
+              to democratizing access to LLMs for a broader audience. Singular Value Decomposition 
+              (SVD), a technique studied for decades, offers a hardware-independent and flexibly 
+              tunable solution for LLM compression. In this paper, we present new directions using 
+              SVD: we first theoretically and experimentally analyze the optimality of directly 
+              truncating activations, then we further identify three key issues on SVD-based LLM 
+              compression, including (1) How can we determine the optimal truncation position for 
+              each weight matrix in LLMs? (2) How can we efficiently update the weight matrices 
+              based on truncated activations? (3) How can we address the inherent "injection" nature 
+              that results in the information loss of the SVD? We propose a new paradigm for SVD-based 
+              LLM compression, <b>Dobi-SVD</b>, to tackle the three issues. First, we propose a <b>differentiable</b> 
+              truncation-value learning mechanism, along with gradient-robust backpropagation, enabling 
+              the model to adaptively find the optimal truncation positions. Next, we utilize the Eckart-Young-Mirsky 
+              theorem to derive a theoretically <b>optimal</b> weight update formula through rigorous 
+              mathematical analysis. Lastly, by observing and leveraging the quantization-friendly nature 
+              of matrices after SVD, we reconstruct a mapping between truncation positions and memory requirements, 
+              establishing a <b>bijection</b> from truncation positions to memory. Experimental results show that 
+              with a 40% parameter-compression rate, our method achieves a perplexity of 9.07 on the Wikitext2 dataset 
+              with the compressed LLama-7B model, a 78.7% improvement over the state-of-the-art SVD for LLM 
+              compression method. We emphasize that Dobi-SVD is the first to achieve such a high-ratio LLM compression 
+              while maintaining competitive performance. We also extend our Dobi-SVD to VLM compression, achieving 
+              a 20% increase in throughput with minimal performance degradation. We hope that the inference speedup—up 
+              to 12.4x on 12GB NVIDIA Titan Xp GPUs and 3x on 80GB A100 GPUs for LLMs, and 1.2x on 80GB A100 GPUs for 
+              VLMs—will bring significant benefits to the broader community such as robotics. -->
+            </p>
+            <br><br>
+            <div class="content has-text-justified">
+              <figure>
+                <img src="./blog_intro/data/intro1.png" alt="Layoffs">
+                <div class="icon icon-i1_1" data-blog="./blog_intro/intro_1_1.html">
+                  <img src="./blog_intro/data/click.gif" class="icon-i1_1-click-icon" alt="click">
+                </div>
+                <div class="icon icon-i1_2" data-blog="./blog_intro/intro_1_2.html"></div>
+              </figure>
+            </div>
+            <div class="content has-text-justified">
+              <figure>
+                <img src="./blog_intro/data/intro2.png" alt="Layoffs">
+                <div class="icon icon-i2_1" data-blog="./blog_intro/intro_2_1.html">
+                  <img src="./blog_intro/data/click.gif" class="icon-i2_1-click-icon" alt="click">
+                </div>
+                <div class="icon icon-i2_2" data-blog="./blog_intro/intro_2_2.html"></div>
+                <div class="icon icon-i2_3" data-blog="./blog_intro/intro_2_3.html"></div>
+                <div class="icon icon-i2_4" data-blog="./blog_intro/intro_2_4.html"></div>
+                <div class="icon icon-i2_5" data-blog="./blog_intro/intro_2_5.html"></div>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Intro -->
+    <br><br>
+    
+    <!-- Overview -->
+    <section class="teaser">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="hero-body">
+            <h2>Overview</h2>
+            <div class="content has-text-justified">
+              <figure>
+                <img src="./blog_overview/data/overview.png" alt="Overview framework of Dobi-SVD">
+                <div class="icon icon-o1" data-blog="./blog_overview/overview_1.html">
+                  <img src="./blog_intro/data/click.gif" class="icon-o1-click-icon" alt="click">
+                </div>
+                <div class="icon icon-o2" data-blog="./blog_overview/overview_2.html"></div>
+                <div class="icon icon-o3" data-blog="./blog_overview/overview_3.html"></div>
+                <div class="icon icon-o4" data-blog="./blog_overview/overview_4.html"></div>
+                <div class="icon icon-o5" data-blog="./blog_overview/overview_5.html"></div>
+                <figcaption style="margin-top: 8px; font-style: normal; text-align: left;">Overview framework of Dobi-SVD: 
+                  <strong>1-3: Differentiable Truncation Position Training.</strong> By
+                  applying parameter renormalization for continuous rank ratio selection and using Taylor expansion
+                  to prevent gradient explosion, our method enables robust and adaptive optimization of truncation
+                  positions. <strong>4: Weight Update.</strong> Using IPCA, we sequentially extract and optimally update weight
+                  matrix features. <strong>5: Remapping.</strong> We resolve a long-overlooked limitation of traditional SVD-based
+                  compression through remapping, fully unlocking SVD's potential for data compression.
+                </figcaption>
+              </figure>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Overview -->
+    <br><br>
+    
+    <!-- Experiments -->
+    <section class="teaser">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="hero-body">
+            <!-- <h2>Selected Experiments</h2> -->
+            <div class="content has-text-justified">
+              <figure>
+                <img src="./blog_exp/data/mind_map.png" alt="Overview framework of Dobi-SVD">
+                <div class="icon icon-e_L1-7B" data-blog="./blog_exp/L1_7B.html">
+                  <img src="./blog_intro/data/click.gif" class="icon-e_L1-7B-click-icon" alt="click">
+                </div>
+                <div class="icon icon-e_L2-7B_and_L3-8B" data-blog="./blog_exp/L2-7B_and_L3-8B.html"></div>
+                <div class="icon icon-e_L1-13B_and_L2-13B" data-blog="./blog_exp/L1-13B_and_L2-13B.html"></div>
+                <div class="icon icon-e_VLM" data-blog="./blog_exp/VLM.html"></div>
+                <div class="icon icon-e_VLA" data-blog="./blog_exp/VLA.html"></div>
+                <div class="icon icon-e_Quant" data-blog="./blog_exp/Quant.html"></div>
+              </figure>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Experiments -->
+
+    <br><br><br>
+    <!-- Demo -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">
+          Demo :&nbsp;&nbsp; LLM&nbsp;&nbsp; &&nbsp;&nbsp; VLM
+          <div class="text-icon icon-video_1" onclick="changeVideo('./blog_exp/data/vid/llm_demo.mp4')"></div>
+          <div class="text-icon icon-video_2" onclick="changeVideo('./blog_exp/data/vid/vlm_demo.mp4')"></div>
+          <img src="./blog_intro/data/click.gif" class="icon-video_1-click-icon" alt="click">
+        </h2>
+
+        <div class="demo-container">
+          <!-- Left -->
+          <div class="video-section">
+            <video id="video" autoplay loop muted>
+              <source id="video-source" src="./blog_exp/data/vid/llm_demo.mp4" type="video/mp4">
+            </video>
+          </div>
+          <!-- Right -->
+          <div class="text-section">
+            <div id="video-description-video-1" class="video-description">
+              <h1 class="title is-3 has-text-centered">LLM</h1>
+              <p class="is-size-6">
+                <strong><i>Model</i></strong><br>
+                LLaMa-2-7B<br><br>
+                <strong><i>Device</i></strong><br>
+                NVIDIA TITAN Xp 12G<br><br>
+                <strong><i>Compression Ratio</i></strong><br>
+                0.4<br><br>
+                <strong><i>Task</i></strong><br>
+                Language question-answering<br>
+                <hr>
+                <a href="https://x.com/o_l_bom/status/1650835949092503554/photo/1" target="_blank">
+                  <img src="./blog_exp/data/o_l_bom-cat.jpg" alt="@o_l_bom">
+                </a>
+              </p>
+            </div>
+            <div id="video-description-video-2" class="video-description" style="display:none;">
+              <h1 class="title is-3 has-text-centered">VLM</h1>
+              <p class="is-size-6">
+                <strong><i>Model</i></strong><br>
+                LlaVA-v1.5-7B<br><br>
+                <strong><i>Device</i></strong><br>
+                NVIDIA TITAN Xp 12G<br><br>
+                <strong><i>Compression Ratio</i></strong><br>
+                0.4<br><br>
+                <strong><i>Task</i></strong><br>
+                Vision question-answering
+                <hr>
+                
+                <a href="https://x.com/o_l_bom/status/1826844949855228263/photo/1" target="_blank">
+                  <img src="./blog_exp/data/o_l_bom-dog.jpg" alt="@o_l_bom">
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+    </section>
+    <!--/ Demo -->
+    <br><br>
+  
+    <!-- BibTex -->
+    <section class="section" style="margin-bottom: -30px;">
+      <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+          <pre><code>@article{
+          }</code></pre>
+      </div>
+    </section>
+    <!--/ BibTex -->
+
+    <!-- Footer -->
+    <footer class="footer", style="padding: 10px 0;">
+      <div class="container">
+          <p class="is-size-5" style="text-align: center;">
+            Designed by Jinghan Ke<br>
+          </p>
+          <p class="is-size-6" style="text-align: center;">
+            The file <i>`bulma.min.css`</i> in 
+            <a href="https://github.com/Ah-miu/Dobi-SVD_webpage" style>source code</a> of this webpage 
+            is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
+          </p>
+      </div>
+    </footer>
+    <!--/ Footer -->
+
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exp_VLM</title>
+    <link rel="stylesheet" href="./style/blog.css">
+    <link rel="stylesheet" href="../style/css/bulma.min.css">
+
+</head>
+<body>
+    <div class="columns has-text-centered">
+        <h1 class="title is-2" style="margin-top: 25px;">On Llava-v1.5-7B</h1>
+    </div><br>
+
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/VLM.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        To further validate the generalizability of our approach, we applied and deployed Dobi-SVD on
+        Vision-Language Models (VLMs). Specifically, we compressed the LLM component of Llavav1.5. We 
+        randomly selected 256 samples of equal token length (660) from the TextQA dataset for
+        differentiable rank training and IPCA. Subsequently, we evaluated the performance on classic VLM
+        QA tasks. <br><br>
+
+        The result indicates that the compression method proposed by Dobi-SVD is not limited to LLM application 
+        scenarios but is a more general approach. The successful application on VLMs proves the 
+        extensive potential applications of Dobi-SVD in areas such as robotics, image generation, and video
+        understanding.
+    </p>
+</body>
+</html>

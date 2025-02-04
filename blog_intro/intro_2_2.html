@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>intro_2_2</title>
+    <link rel="stylesheet" href="./style/blog.css">
+    <link rel="stylesheet" href="../style/css/bulma.min.css">
+</head>
+<body>
+    
+    <h1 class="title is-3">Explanation</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/i2.2.1.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        Another kind of is activation-aware based SVD: 
+        They borrow the idea from quantization and use 
+        a scaling matrix <i>S</i> <strong>(like the HR)</strong> to capture the 
+        varying importance of input channels and to estimate 
+        activation influence by performing SVD on <i>WS</i> 
+        and reconstructing W using the inverse of <i>S</i> matrix. 
+        <br><br>
+
+        Additionally, the inverse of <i>S</i> matrix sometimes fails 
+        due to floating point precision issues. 
+        Different GPUs have different floating point 
+        precisions <strong>(sometimes HR may not show us the correct data)</strong>.
+    </p>
+    <br><br>
+
+    <p class="is-size-4 has-text-centered">
+    Are they optimal? Do we have a better way?
+    </p>
+    <br><br>
+</body>
+</html>

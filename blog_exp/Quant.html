@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exp_Quant</title>
+    <link rel="stylesheet" href="./style/blog.css">
+    <link rel="stylesheet" href="../style/css/bulma.min.css">
+
+</head>
+<body>
+    <div class="columns has-text-centered">
+        <h1 class="title is-2" style="margin-top: 25px;">About Quantizaiton</h1>
+    </div><br>
+
+    <h1 class="title is-3">Combined with quantization (Table 20 in Paper)</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/Quant_1.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        <strong><i>Caption</i></strong> Performance comparison between pure quantization and DobiSVD + quantization.<br><br>
+
+        It is worth noting that quantization is often constrained by device limitations 
+        (e.g., some low-performance devices do not support 4-bit operations). By combining with DobiSVD, 
+        the model can overcome these limitations to
+        achieve better performance at lower compression ratios.
+    </p>
+    <br><br>
+
+    <h1 class="title is-3">Fairer comparison (Table 21 in Paper)</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/Quant_2.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        <strong><i>Caption</i></strong> Performance comparison of DobiSVD and Bitsandbytes quantization on Llama-2-7b.<br><br>
+
+        To provide a fairer comparison, we compared our method with quantization methods that have not
+        undergone kernel optimization. We selected the BnB library from Hugging Face, which quantizes
+        weight matrices using the QLoRA approach. Since our algorithm is also implemented within the
+        Hugging Face framework, we believe this is a fairer and more convincing comparison. As shown
+        in the Table 21, despite our model size being larger than that of the quantized model, the inference
+        speed of the DobiSVD-compressed model exceeds that of the quantized model. This is because:
+        (1) DobiSVD requires fewer FLOPs, which enables faster inference when memory is not a limiting
+        factor, and (2) DobiSVD does not require quantization serving, thereby avoiding the significant
+        dequantization time associated with quantization.
+    </p>
+</body>
+</html>

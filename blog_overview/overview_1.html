@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 1</title>
+    <link rel="stylesheet" href="./style/blog.css">
+    <link rel="stylesheet" href="../style/css/bulma.min.css">
+
+</head>
+<body>
+    <div class="columns has-text-centered">
+        <h1 class="title is-2" style="margin-top: 25px;">1. Optimal Truncation Position</h1>
+    </div><br>
+    
+    <h1 class="title is-3">Why</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/o1.1.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">When we want to calculate the Optimal Truncation Position, for a large model, there are too many singular 
+        values to consider. For example, Llama1-7B has 32 layers, and for each layer, we consider 
+        7 matrices: <i>K, Q, V, O, mlp.gate, mlp.up, mlp.down</i>. 
+        Each matrix contains between 4096 and 11008 singular values. <br><br>
+        
+        Previous works divided them into several fixed proportions and used search or genetic algorithms. 
+        However, we've tested<sup>[1]</sup> that even 
+        changing just a tiny bit of the singular values can lead to a significant drop in performance. 
+        This shows that there is a sensitive relationship between the singular values and model 
+        performance. In general, previous works need fine-tuning to show competitive performance. <br><br>
+
+        So, we use <i>tanh</i> to make the selecting process continuous and hope to consider all the singular values.
+    </p>
+    <hr class="custom-hr">
+    <p class="is-size-7">
+        <sup>[1]</sup> [Dobi-SVD] A.7.4 Truncation Sensitivity Analysis
+    </p>
+</body>
+</html>

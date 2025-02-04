@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 2</title>
+    <link rel="stylesheet" href="./style/blog.css">
+    <link rel="stylesheet" href="../style/css/bulma.min.css">
+    <!-- MathJax -->
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>        
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$']]},
+      });
+    </script>
+</head>
+<body>
+    <div class="columns has-text-centered">
+        <h1 class="title is-2" style="margin-top: 25px;">1. Optimal Truncation Position</h1>
+    </div><br>
+    
+    <h1 class="title is-3">Explanation</h1>
+    <p class="is-size-6">
+        After continuously selecting, we use differentiable techniques to find the best truncation position. 
+        This is a very natural idea, but previous works haven't done this because they couldn't solve this issue:<br><br>
+
+        Since lots of singular values in the low-rank matrix are of similar size, and during SVD backpropagation, 
+        there's an operator: $\frac{1}{\sigma_i - \sigma_j}$, one divided by the difference of singular i and singular j, 
+        which can lead to gradient explosion.<br><br>
+
+        We then use the Taylor Expansion to change the subtraction into a division form.<br><br>
+        
+        This is not a common method for handling gradient explosion. Besides our work, we found only one paper<sup>1</sup>, 
+        which also addresses the backpropagation issue of SVD, and it focuses on lower-dimensional symmetric matrices and CV tasks, 
+        whereas we are dealing with higher-dimensional general matrices and applying it on large models. 
+        If you're interested in the impact of the Taylor Expansion on gradients, you can refer to that paper.
+
+    </p>
+    <hr class="custom-hr">
+    <p class="is-size-7">
+        <sup>[1]</sup> Robust Differentiable SVD, TPAMI 2021
+    </p>
+</body>
+</html>

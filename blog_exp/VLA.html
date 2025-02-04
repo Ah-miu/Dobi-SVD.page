@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exp_VLA</title>
+    <link rel="stylesheet" href="./style/blog.css">
+    <link rel="stylesheet" href="../style/css/bulma.min.css">
+
+</head>
+<body>
+    <div class="columns has-text-centered">
+        <h1 class="title is-2" style="margin-top: 25px;">On OpenVLA-7B (Table 24 in Paper)</h1>
+    </div><br>
+
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/VLA.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        <strong><i>Caption</i></strong>  The performance of the DobiSVD compressed OpenVLA model on BridgeData V2. For
+        coordinates and angles, we calculate the MSE. For opening or closing, we calculate the accuracy. We
+        calculate how many tasks can be completed per second on average.<br><br>
+
+        Deploying large models on edge devices has remained one of the most significant challenges in the
+        field of robotics. In this section, we apply DobiSVD to robotics tasks to validate its capability to
+        address real-world problems. Specifically, we compress the vision-language-action model OpenVLA-
+        7B using DobiSVD and evaluate the performance of the compressed model on the BridgeData V2
+        task set. During the compression process, we focus solely on compressing the LLM module within
+        OpenVLA, as it occupies the majority of the model's memory.<br><br>
+
+        These findings highlight DobiSVD’s high adaptability for robotics tasks, underscoring its practical
+        utility. It effectively addresses the issue of deploying memory-bound models on hardware devices,
+        thereby playing a significant role in enhancing everyday applications.
+    </p>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>intro_1_2</title>
+    <link rel="stylesheet" href="./style/blog.css">
+    <link rel="stylesheet" href="../style/css/bulma.min.css">
+
+</head>
+<body>
+    <div class="columns has-text-centered">
+        <h1 class="title is-2" style="margin-top: 25px;">SVD for Compression: Explained from the Perspective of Company Layoffs</h1>
+    </div><br>
+    
+    <h1 class="title is-3">Explanation of this Picture</h1>
+    <p class="is-size-6">
+        It's natural to think that the small singular values in the tail are redundant, 
+        and the remaining ones can complete the task with good results. The boundary 
+        between them is the truncation position. <br><br>
+        
+        In other words, it's like a company 
+        running out of funds &#0151; how do we lay off employees while still keeping 
+        the business running smoothly?<br><br>
+
+        <i>NOTE: We are linking the two concepts here in order to explain the motivation behind 
+        Dobi-SVD as simply as possible later on, and to highlight the differences with previous works.</i>
+    </p>
+    <br><br>
+
+    <h1 class="title is-3">Which Singular Values Drive Task Performance Well?</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/i1.2.1.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        In this layoff example, if we think of the left side as the weight matrix, 
+        what would the activation matrix look like?
+    </p>
+    <br><br>
+
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/i1.2.2.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        It's like when we invest money to keep the company running and get results.
+    </p>
+    <br><br>
+
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/i1.2.3.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        Then, we understand which singular values are important.
+    </p>
+    <br><br>
+
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/i1.2.4.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        Our HR conducts an assessment and reports back to us, explaining why laying off Team B<sup>[1]</sup> would be enough.
+    </p>    
+
+    <hr class="custom-hr">
+    <p class="is-size-7">
+        <sup>[1]</sup> This is just an example; we like Minions. 
+        They are friendly, curious, passionate, and know how to enjoy life.
+    </p>
+</body>
+</html>

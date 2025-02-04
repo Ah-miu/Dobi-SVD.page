@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 4</title>
+    <link rel="stylesheet" href="./style/blog.css">
+    <link rel="stylesheet" href="../style/css/bulma.min.css">
+    <!-- MathJax -->
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>        
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$','$']]},
+      });
+    </script>
+</head>
+<body>
+    <div class="columns has-text-centered">
+        <h1 class="title is-2" style="margin-top: 25px;">Optimal Approach</h1>
+    </div><br>
+    
+    <h1 class="title is-3">At the Module Level (XW=A)</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-five-fifths">
+                <img src="./data/i2.4.1.png"  style="width: 50%; height: auto;">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        EYM-Theorem shows that directly truncating activation gives $A_k$, the optimal k-rank approximation of $A$. 
+    </p>
+    <br><br>
+
+    <h1 class="title is-3">At the Model Level</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/i2.4.2.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        Performance comparison of directly truncating activations and truncating weights<sup>[1]</sup>. 
+        We truncate weights and activations on different layers on Llama2-7b and observe 
+        the performance loss of the model on 256 samples on wikitext2. In any case, 
+        truncating activations has a smaller performance loss than truncating weights.
+    </p>
+
+    <hr class="custom-hr">
+    <p class="is-size-7">
+        <sup>[1]</sup> Analysis of directly truncating activations over weights
+    </p>
+</body>
+</html>

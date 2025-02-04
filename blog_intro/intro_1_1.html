@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>intro_1_1</title>
+    <link rel="stylesheet" href="./style/blog.css">
+    <link rel="stylesheet" href="../style/css/bulma.min.css">
+
+</head>
+<body>
+    <div class="columns has-text-centered">
+        <h1 class="title is-2" style="margin-top: 25px;">
+            [Information Flush] Low Rank Feature in Model Matrices & Coastal Plains Estuaries
+        </h1>
+    </div><br>
+    
+    <h1 class="title is-3">What is SVD</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/i1.1.1.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        SVD stands for Singular Value Decomposition (not Stable Video Diffusion). When we perform SVD on a matrix <i>W</i>, 
+        we obtain three matrices: <i>U</i>, <i>S</i>, and <i>V</i>.
+        <li>Singular value indicates the degree of stretching or compression of the matrix transformation, 
+        affecting the size of the input vector projection in the output space.</li>
+        <li>Left singular vector Represents the important direction in the input space (or original space).</li>
+        <li>Right singular vector Represents the important direction in the output space (or transformed space.</li>
+    </p>
+    <br><br>
+
+    <h1 class="title is-3">Low Rank Feature in Model Matrices</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/i1.1.2.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        LLM weight matrices present long-tailed shape, which means that they are low rank. VLM, VAR, VLA also have this kind of feature.
+    </p>
+    <br><br>
+
+    <h1 class="title is-3">Information Flush: Pre-training &#8596; Delta</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/i1.1.3.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        After pre-training, the singular values of the weight matrix form a long-tailed shape, 
+        like the delta of a Coastal Plain Estuary<sup>[1]</sup>. To put it more vividly, it's the <strong>information 
+        flush</strong><sup>[2]</sup> that changed the weights. And what kind of information is this?<br><br>
+
+        It's like when we first learn a language &#0151; we focus on high-frequency words and 
+        expressions because they help us use the language effectively.<br><br>
+        
+        Similarly, after pre-training, the singular values show us which features are 
+        important for the model to finish tasks. Generally, the larger the singular value, 
+        the greater its impact on task performance.
+    </p>
+
+    <hr class="custom-hr">
+    <p class="is-size-7">
+        <sup>[1]</sup> The example of the Coastal Plain Estuary in the image is sourced from 
+        the <a href="https://www.sciencelearn.org.nz/resources/1229-estuary-formation" target="_blank">Science Learning Hub</a>.
+        <br>
+        <sup>[2]</sup> Jinghan Ke: I connected them intuitively and used the term "Information Flush" to describe it. 
+        If you're interested or have related research you'd like to share, feel free to email me.
+    </p>
+</body>
+</html>

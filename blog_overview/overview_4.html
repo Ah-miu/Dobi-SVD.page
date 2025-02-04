@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog 4</title>
+    <link rel="stylesheet" href="./style/blog.css">
+    <link rel="stylesheet" href="../style/css/bulma.min.css">
+
+</head>
+<body>
+    <div class="columns has-text-centered">
+        <h1 class="title is-2" style="margin-top: 25px;">2. From Truncated Activation to New Weight</h1>
+    </div><br>
+    
+    <!-- Truncation and Projection -->
+    <h1 class="title is-3">"Truncation" &rarr; "Projection"</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/o4.1.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        Through formula derivation, when we truncate the activation, it's like we are projecting it.
+    </p>
+    <br><br>
+
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/o4.2.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        When we perform our differentiable algo with n calibration data samples, we project each activation 
+        into n different k-dimensional spaces. Naturally, if we want to find the one closest to all of these 
+        n k-dimensional spaces, we can use PCA for dimensionality reduction.
+    </p>
+    <br><br>
+
+    <!-- PCA and SVD -->
+    <h1 class="title is-3">What's the relationship between PCA and SVD?</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/o4.3.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        Classic PCA calculates the eigenvectors of the covariance matrix, which are the principal directions, 
+        and then projects the original matrix data onto these directions to achieve dimensionality reduction. 
+        The principal directions here are the V obtained from SVD.
+    </p>
+    <br><br>
+
+    <!-- PCA and IPCA -->
+    <h1 class="title is-3">Why we need IPCA and what is it?</h1>
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/o4.4.png">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        But here's the problem: it's not possible to compress the entire matrix at once because it requires too much memory.
+    </p>
+    <br><br>
+
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <img src="./data/o4.5.gif">
+            </div>
+        </div>
+    </div>
+    <p class="is-size-6">
+        So, we used Incremental PCA, which processes the data in a streaming way.
+    </p>
+    <br><br>
+
+    <p class="is-size-5">
+        In summary, regarding the update weight, we drew an (dopamine-colored) extraction device to illustrate the streaming process.
+    </p>
+
+</body>
+</html>

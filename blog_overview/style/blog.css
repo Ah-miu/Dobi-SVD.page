@@ -1,0 +1,65 @@
+.custom-hr {
+    border: 0;
+    height: 2px;
+    background-color: rgb(0, 0, 0);
+    margin: 20px 0;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+    height: 12px;
+  }
+  
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+::-webkit-scrollbar-thumb {
+    background: rgb(148, 167, 207);
+    border-radius: 10px;
+    border: 3px solid rgb(248, 202, 202);
+  }
+  
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(15, 76, 130);
+}
+
+
+
+
+
+.overlap-image-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 56.25%; /* 16:9 */
+    overflow: hidden;
+}
+
+.overlap-image-container .image-default,
+.overlap-image-container .image-hover {
+    position: absolute; /* let them overlap */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.5s ease; /* Transparency transition effect */
+}
+
+.overlap-image-container .image-default {
+    opacity: 1; /* Cover image is displayed by default */
+}
+
+.overlap-image-container .image-hover {
+    opacity: 0; /* Hover image is transparent by default */
+}
+
+.overlap-image-container:hover .image-default {
+    opacity: 0;
+}
+
+.overlap-image-container:hover .image-hover {
+    opacity: 1;
+}
