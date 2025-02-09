@@ -27,6 +27,13 @@
   text-decoration-skip-ink: none;
 }
 
+.text-box {
+  border: 3px solid black;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+
 .footer a{
   color: rgb(148, 167, 207);
 }
@@ -48,6 +55,29 @@ h2 {
   font-size: 80px;
 }
 
+
+/* auto icon show for abstract*/
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+}
+.icon-abstract {
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  background-color: rgb(254, 111, 97);
+  animation: pulse 2s infinite ease-in-out;
+}
 
 /* ! big-pic in main-index */
 
@@ -80,12 +110,12 @@ h2 {
   height: 30px;
   border-radius: 100%; /* without: rectangle */
   background-color: rgb(254, 111, 97);
-  opacity: 0.4;
+  opacity: 0.4; /* from */
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .teaser .hero-body figure .icon:hover {
-  opacity: 0.8; /* to 80% */
+  opacity: 0.9; /* to */
   transform: scale(1.5);
 }
 
@@ -97,7 +127,6 @@ h2 {
   top: 160%;
   left: 50%;
   transform: translate(-50%, -50%); /* Center Align */
-  width: 1.5rem;
 }
 
 /* introduction 2 */
@@ -126,7 +155,6 @@ h2 {
   top: 50%;
   left: -50%;
   transform: translate(-50%, -50%) rotate(90deg); /* Center Align and Rotate */
-  width: 1.5rem;
 }
 
 /* ! overview */
@@ -140,7 +168,6 @@ h2 {
   top: 160%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1.5rem;
 }
 
 /* ! Experiments */
@@ -155,7 +182,6 @@ h2 {
   top: 160%;
   left: 50%;
   transform: translate(-50%, -50%); /* Center Align */
-  width: 1.5rem;
 }
 
 /* ! icon in title */
@@ -187,8 +213,9 @@ h2 {
   right: -70%;
   transform: translate(-50%, -50%) rotate(-90deg); /* Center Align and Rotate */
   /* transform: translate(-50%, -50%);  wow */
-  width: 1.5rem;
-  top: 90%; left: 67%;
+  top: 90%; left: 67.3%;
+  width: 30px;
+  height: 30px;
 }
 
 
